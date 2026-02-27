@@ -12,4 +12,6 @@ For any commercial use, please contact the authors separately to obtain permissi
 
 First author: junukcha@gmail.com (Junuk Cha)
 
+Co-author: jihyeonk0226@gmail.com (Jihyeon Kim)
+
 Corresponding author: hanmu@keti.re.kr or hanmupark@gmail.com (Han-Mu Park)
