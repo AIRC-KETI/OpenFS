@@ -8,7 +8,7 @@ The official implementation will be released soon.
 
 This project is released for **non-commercial research purposes only**.  
 
-For any commercial use, please contact the authors separately to obtain permission.
+For any commercial use, please contact the authors to obtain permission.
 
 First author: junukcha@gmail.com (Junuk Cha)
 
