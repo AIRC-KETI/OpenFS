@@ -10,11 +10,11 @@ This project is released for **non-commercial research purposes only**.
 
 For any commercial use, please contact the authors to obtain permission.
 
-First author: junukcha@gmail.com (Junuk Cha)
+First author: junukcha@gmail.com ([Junuk Cha](https://junukcha.github.io/))
 
-Co-author: jihyeonk0226@gmail.com (Jihyeon Kim)
+Co-author: jihyeonk0226@gmail.com ([Jihyeon Kim](https://sites.google.com/view/jihyeonkim2/%ED%99%88))
 
-Corresponding author: hanmu@keti.re.kr or hanmupark@gmail.com (Han-Mu Park)
+Corresponding author: hanmu@keti.re.kr or hanmupark@gmail.com ([Han-Mu Park](https://sites.google.com/view/hanmupark))
 
 ## Installation
 
