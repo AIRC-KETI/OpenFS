@@ -87,7 +87,7 @@ Recognizer:
 source scripts/test/test_recognizer.sh recognizer_fsboard
 ```
 
-## Demo
+## Demo (Generation)
 
 ### Chicago
 
