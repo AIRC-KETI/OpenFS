@@ -1,0 +1,79 @@
+defaults:
+  - decode: chicago
+
+seed: 0
+
+train:
+  num_workers: 4
+  learning_rate: 0.0001
+  optim_step_size: 120
+  optim_gamma: 0.9
+  num_epochs: 120
+  start_eval_epoch: 10
+  eval_epoch_step: 10
+  print_step_iter: 400
+  batch_size: 32
+  train_shuffle: true
+  optimizer:
+    _target_: torch.optim.Adam
+  loss:
+    loss_recon_joints_fn:
+      _target_: lib.utils.loss.get_mse_loss_with_ignore
+    loss_recon_joints_weight: 1
+
+train_dataset:
+  _target_: lib.datasets.fingerspelling_gen.MediaPipeDataset
+  data_path: data/fingerspelling/Chicago_train_merged_proc_clean.npz
+  representation: 3d
+  return_video_name: true
+  do_augm: true
+  do_affine: false
+  do_reverse: false
+  trim_input_ids: true
+train_collate_fn:
+  _target_: lib.utils.dataloader.paired_collate_gen_fn
+test_dataset:
+  _target_: lib.datasets.fingerspelling_gen.MediaPipeDataset
+  data_path: data/fingerspelling/Chicago_dev_merged_proc_clean.npz
+  representation: 3d
+  return_video_name: true
+  do_augm: false
+  do_affine: false
+  do_reverse: false
+  trim_input_ids: true
+test_collate_fn:
+  _target_: lib.utils.dataloader.paired_collate_gen_fn
+
+diffusion:
+  _target_: lib.models.diffusion.Diffusion
+  beta_1: 1e-4
+  beta_T: 0.02
+  T: 1000
+  schedule_name: cosine
+  sampling_name: ddim
+  eta: 0
+  ddim_steps: 50
+
+generator:
+  _target_: lib.models.generator_df.EncoderTransformer
+  pose_dim: 63
+  d_model: 256
+  nhead: 8
+  num_layers: 3
+  dim_feedforward: 2048
+  dropout: 0.1
+  activation: gelu
+  ckpt_path: best_model.pth
+
+recognizer:
+  _target_: lib.models.recognizer.EncoderDecoderTransformer
+  input_dim: 42
+  max_len: 1024
+  d_model: 256
+  nhead: 8
+  num_layers: 3
+  dim_feedforward: 2048
+  dropout: 0.1
+  activation: gelu
+  conventional_positional_encoding: false
+  ckpt_path: outputs_save/2d/best_model.pth

@@ -1,0 +1,64 @@
+defaults:
+  - decode: chicago
+
+seed: 0
+
+train:
+  num_workers: 4
+  learning_rate: 0.0001
+  optim_step_size: 120
+  optim_gamma: 0.9
+  num_epochs: 120
+  start_eval_epoch: 10
+  eval_epoch_step: 10
+  print_step_iter: 400
+  batch_size: 32
+  train_shuffle: true
+  optimizer:
+    _target_: torch.optim.Adam
+  loss:
+    loss_ce_fn:
+      _target_: lib.utils.loss.get_loss_ce
+    loss_ce_weight: 1
+
+train_dataset:
+  _target_: lib.datasets.fingerspelling_gen.MediaPipeDataset
+  data_path: data/fingerspelling/Chicago_train_merged_proc.npz
+  representation: 3d
+  return_video_name: true
+  do_augm: true
+  do_affine: false
+  do_reverse: false
+  trim_input_ids: true
+train_collate_fn:
+  _target_: lib.utils.dataloader.paired_collate_gen_fn
+test_dataset:
+  _target_: lib.datasets.fingerspelling_gen.MediaPipeDataset
+  data_path: data/fingerspelling/Chicago_dev_merged_proc.npz
+  representation: 3d
+  return_video_name: true
+  do_augm: false
+  do_affine: false
+  do_reverse: false
+  trim_input_ids: true
+test_collate_fn:
+  _target_: lib.utils.dataloader.paired_collate_gen_fn
+
+frame_classifier:
+  _target_: lib.models.frame_classifier.Classifier
+  d_model: 256
+  dropout: 0.1
+  ckpt_path: best_model.pth
+
+recognizer:
+  _target_: lib.models.recognizer.EncoderDecoderTransformer
+  input_dim: 42
+  max_len: 1024
+  d_model: 256
+  nhead: 8
+  num_layers: 3
+  dim_feedforward: 2048
+  dropout: 0.1
+  activation: gelu
+  conventional_positional_encoding: false
+  ckpt_path: outputs_save/2d/best_model.pth

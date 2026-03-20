@@ -1,0 +1,21 @@
+torch_geometric==2.6.1
+pandas
+opencv-python
+scikit-learn
+torchinfo==1.8.0
+kornia
+mediapipe==0.10.9
+hydra-core
+numpy==1.23.5
+accelerate
+openpyxl
+transformers
+sentencepiece
+pytorch_fid
+
+imageio
+imageio[ffmpeg]
+smplx
+# chumpy
+
+gdown
