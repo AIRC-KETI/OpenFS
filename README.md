@@ -26,6 +26,22 @@ source scripts/install.sh
 
 ## Data
 
+For FSBoard, we provide our own MediaPipe-processed results through the download scripts below.
+
+<details>
+<summary>FSBoard data issue note</summary>
+
+The Kaggle discussion mentions potential issues in the original FSBoard release, including:
+
+- unusual keypoint visualization where body parts appear as 3 disjoint clusters
+- pose tracks with 25 landmarks instead of the expected 33
+- pose visibility/presence values outside the usual `[0, 1]` range
+- our interpretation: a possible schema/axis issue where `x`, `y`, and `z` may be stored in an interleaved layout rather than as standard per-joint coordinates
+
+See the [discussion](https://www.kaggle.com/datasets/googleai/fsboard/discussion/610126) for details.
+</details>
+<br>
+
 Training data (optional, only needed for training):
 
 ```bash
