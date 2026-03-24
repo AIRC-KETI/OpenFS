@@ -77,6 +77,67 @@ source scripts/download/download_data_test.sh
 source scripts/download/download_ckpts.sh
 ```
 
+If the download scripts are temporarily blocked, you can also download the files manually from Google Drive:
+
+- [OpenFS data folder](https://drive.google.com/drive/folders/1NB5wVgeTmoZIGjq58ueejj80mFmtebSg?usp=sharing)
+- [OpenFS checkpoint folder](https://drive.google.com/drive/folders/1BiUwqlEbBhy9q4wXKEIzJ0CBuvywHGX1?usp=sharing)
+
+Directory structure:
+
+```text
+data/
+├── CustomChicagoFSWildPlusFinal.csv
+├── posenet_signhand_miss.txt
+├── english_word/
+│   ├── Chicago_train.txt
+│   ├── except_words_alpha.txt
+│   ├── Neologisms.xlsx
+│   ├── neobench_test.txt
+│   └── words_alpha.txt
+├── fingerspelling/
+│   ├── Chicago_dev_merged.npz
+│   ├── Chicago_dev_merged_proc.npz
+│   ├── Chicago_dev_merged_proc_clean.npz
+│   ├── Chicago_test_merged.npz
+│   ├── Chicago_test_merged_proc.npz
+│   ├── Chicago_test_merged_proc_clean.npz
+│   ├── Chicago_train_merged.npz
+│   ├── Chicago_train_merged_proc.npz
+│   ├── Chicago_train_merged_proc_clean.npz
+│   ├── ChicagoFSWild_test.npz
+│   ├── ChicagoFSWildPlus_test.npz
+│   ├── neobench_test_gen.npz
+│   └── words_alpha_train_filtered_gen.npz
+└── fingerspelling_fsboard/
+    ├── fsboard_test.npz
+    ├── fsboard_test_proc.npz
+    ├── fsboard_test_proc_clean.npz
+    ├── fsboard_train.npz
+    ├── fsboard_train_proc.npz
+    ├── fsboard_train_proc_clean.npz
+    ├── fsboard_validation.npz
+    ├── fsboard_validation_proc.npz
+    └── fsboard_validation_proc_clean.npz
+```
+
+Notes:
+
+- `proc` files contain coarse frame labels.
+- `clean` files contain clean frame labels.
+
+Checkpoint directory structure:
+
+```text
+outputs_save/
+├── frame_classifier/
+├── frame_classifier_fsboard/
+├── generator_df/
+├── generator_df_fsboard/
+├── recognizer/
+├── recognizer_fsboard/
+└── recognizer_plus/
+```
+
 ## Test
 
 ### Chicago
