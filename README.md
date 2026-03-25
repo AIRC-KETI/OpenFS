@@ -122,6 +122,7 @@ data/
 
 Notes:
 
+- `CustomChicagoFSWildPlusFinal.csv` contains our manual labeling results for the Chicago test set, indicating whether each sample is fingerspelled with the left hand, right hand, or both hands.
 - `proc` files contain coarse frame labels.
 - `clean` files contain clean frame labels.
 
