@@ -19,3 +19,6 @@ smplx
 # chumpy
 
 gdown
+
+parmap
+ultralytics==8.3.128
