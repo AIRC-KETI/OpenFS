@@ -84,9 +84,12 @@ If you want to run preprocessing yourself, place the downloaded raw datasets und
 - ChicagoFSWild download page: https://home.ttic.edu/~klivescu/ChicagoFSWild.htm#download
 - For `FSboard`, download the raw video clips with `python download_fsboard_videos.py`
 
-- `data/raw/ChicagoFSWild`
-- `data/raw/ChicagoFSWildPlus`
-- `data/raw/FSboard`
+```text
+data/raw/
+├── ChicagoFSWild
+├── ChicagoFSWildPlus
+└── FSboard
+```
 
 For `ChicagoFSWild`:
 
