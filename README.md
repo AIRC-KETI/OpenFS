@@ -77,38 +77,6 @@ source scripts/download/download_data_test.sh
 source scripts/download/download_ckpts.sh
 ```
 
-Preprocessing (optional):
-
-If you want to run preprocessing yourself, place the downloaded raw datasets under `data/raw/` first:
-
-- ChicagoFSWild download page: https://home.ttic.edu/~klivescu/ChicagoFSWild.htm#download
-- For `FSboard`, download the raw video clips with `python download_fsboard_videos.py`
-
-```text
-data/raw/
-├── ChicagoFSWild
-├── ChicagoFSWildPlus
-└── FSboard
-```
-
-For `ChicagoFSWild`:
-
-```bash
-python preprocessing.py
-```
-
-For `ChicagoFSWildPlus`:
-
-```bash
-python preprocessing.py --plus
-```
-
-For `FSboard`:
-
-```bash
-python preprocessing_fsboard.py
-```
-
 If the download scripts are temporarily blocked, you can also download the files manually from Google Drive:
 
 - [OpenFS data folder](https://drive.google.com/drive/folders/1NB5wVgeTmoZIGjq58ueejj80mFmtebSg?usp=sharing)
@@ -169,6 +137,40 @@ outputs_save/
 ├── recognizer/
 ├── recognizer_fsboard/
 └── recognizer_plus/
+```
+
+## Preprocessing (optional)
+
+Optional, only needed if you want to run preprocessing yourself.
+
+- ChicagoFSWild download page: https://home.ttic.edu/~klivescu/ChicagoFSWild.htm#download
+- For `FSboard`, download the raw video clips with `python download_fsboard_videos.py`
+
+Place the downloaded raw datasets under:
+
+```text
+data/raw/
+├── ChicagoFSWild
+├── ChicagoFSWildPlus
+└── FSboard
+```
+
+For `ChicagoFSWild`:
+
+```bash
+python preprocessing.py
+```
+
+For `ChicagoFSWildPlus`:
+
+```bash
+python preprocessing.py --plus
+```
+
+For `FSboard`:
+
+```bash
+python preprocessing_fsboard.py
 ```
 
 ## Test
