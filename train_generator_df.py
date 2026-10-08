@@ -90,6 +90,12 @@ def main(cfg: DictConfig):
     dataset_test = test_dataset_partial(
         vocab=vocab_map, use_frame_label=True
     )
+    eval_max_len = cfg.train.get('eval_max_len', None)
+    if eval_max_len is None:
+        eval_max_len = max(32, max((len(str(word).strip()) for word in dataset_test.words), default=0) + 1)
+    if not isinstance(eval_max_len, int) or eval_max_len < 1:
+        raise ValueError('train.eval_max_len must be a positive integer or null')
+    logging.info(f'Evaluation decoding limit: {eval_max_len} tokens including EOS')
     test_dataloader = DataLoader(
         dataset_test,
         batch_size=32,
@@ -178,6 +184,8 @@ def main(cfg: DictConfig):
         preds_no_sampled = []
         preds_gt_poses = []
         gt_labels = []
+        truncated = 0
+        truncated_gt_poses = 0
         eval_start_time = time.time()
         with torch.no_grad():
             for i, batch in enumerate(test_dataloader):
@@ -199,18 +207,24 @@ def main(cfg: DictConfig):
                 )
 
                 rlh_seg = torch.zeros_like(frame_idx)
+                # Normalization erases the sentinel used by recognizer attention masks.
+                padding_mask = (poses == constants.MINUS_TWO_VALUE).all(dim=-1).all(dim=-1)
                 out_poses_2d = sample_poses[..., :2]
                 out_poses_2d = normalize_torch(out_poses_2d, normalize_value=0.5)
-                recognizer_out = recognizer.generate(out_poses_2d, rlh_seg, frame_idx, bos_token_id=len(char_list), eos_token_id=0)
+                out_poses_2d = out_poses_2d.masked_fill(padding_mask[..., None, None], constants.MINUS_TWO_VALUE)
+                recognizer_out = recognizer.generate(out_poses_2d, rlh_seg, frame_idx, max_len=eval_max_len, bos_token_id=len(char_list), eos_token_id=0)
                 output_ids = recognizer_out['output_ids']
+                truncated += (~(output_ids[:, 1:] == 0).any(dim=1)).sum().item()
                 for b in range(B):
                     pred = ''.join(invert_to_chars(output_ids[b:b+1, 1:].cpu(), inv_vocab_map))
                     preds.append(pred)
 
                 poses_2d = poses[..., :2]
                 poses_2d = normalize_torch(poses_2d, normalize_value=0.5)
-                recognizer_out = recognizer.generate(poses_2d, rlh_seg, frame_idx, bos_token_id=len(char_list), eos_token_id=0)
+                poses_2d = poses_2d.masked_fill(padding_mask[..., None, None], constants.MINUS_TWO_VALUE)
+                recognizer_out = recognizer.generate(poses_2d, rlh_seg, frame_idx, max_len=eval_max_len, bos_token_id=len(char_list), eos_token_id=0)
                 output_ids_gt_poses = recognizer_out['output_ids']
+                truncated_gt_poses += (~(output_ids_gt_poses[:, 1:] == 0).any(dim=1)).sum().item()
                 for b in range(B):
                     pred_gt_poses = ''.join(invert_to_chars(output_ids_gt_poses[b:b+1, 1:].cpu(), inv_vocab_map))
                     preds_gt_poses.append(pred_gt_poses)
@@ -219,7 +233,7 @@ def main(cfg: DictConfig):
 
                 if i < 2:
                     save_pose_comparison_video(
-                        poses_2d[0].cpu(), out_poses_2d[0].cpu(), word[0],
+                        poses_2d[0][~padding_mask[0]].cpu(), out_poses_2d[0][~padding_mask[0]].cpu(), word[0],
                         os.path.join(
                             save_root, f"epoch_{epoch+1}",
                             f"gen_{i}_{int(os.environ.get('LOCAL_RANK', 0))}.mp4"

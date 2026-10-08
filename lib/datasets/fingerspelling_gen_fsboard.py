@@ -176,6 +176,9 @@ class MediaPipeDataset(Dataset):
 
         # normalize
         poses[..., :2] = normalize(poses[..., :2], normalize_value=0.5)
+        # Mirror left signing hands into the right-hand convention, not temporal order.
+        if signing_hand % 2 == 1:
+            poses[..., 0] *= -1
         poses[:, :, 2] -= poses[:, 9:10, 2]
 
         # rotation augmentation
