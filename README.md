@@ -8,6 +8,8 @@
 
 This project is released for **non-commercial research purposes only**.
 
+See the [LICENSE](LICENSE) file for the full terms.
+
 For any commercial use, please contact the authors to obtain permission.
 
 First author: junukcha@gmail.com ([Junuk Cha](https://junukcha.github.io/))
