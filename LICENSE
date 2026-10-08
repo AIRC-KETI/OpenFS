@@ -1,0 +1,20 @@
+OpenFS Non-Commercial Research License
+
+Copyright (c) 2026 AIRC-KETI and the OpenFS authors.
+All rights reserved.
+
+Permission is granted to use, reproduce, modify, and distribute the OpenFS source code and released model checkpoints solely for non-commercial research and educational purposes.
+
+Commercial use of the source code, model checkpoints, or derivative works is strictly prohibited without prior written permission from the copyright holders.
+
+Redistributions and derivative works must retain this copyright notice, this license, and appropriate attribution to the original authors.
+
+The released model checkpoints may have been trained using third-party datasets, including ChicagoFSWild, ChicagoFSWild+, and FSboard. Use of such checkpoints does not grant any rights to the underlying datasets. Users are solely responsible for complying with the licenses, terms of use, and other restrictions applicable to those datasets.
+
+This license does not supersede or modify any third-party license or terms applicable to datasets, software, models, or other materials used by or distributed with this project.
+
+THE SOFTWARE, MODEL CHECKPOINTS, AND ASSOCIATED MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR IN CONNECTION WITH THE USE OF THE SOFTWARE, MODEL CHECKPOINTS, OR ASSOCIATED MATERIALS.
+
+For commercial licensing or other uses not covered by this license, please contact the authors.
