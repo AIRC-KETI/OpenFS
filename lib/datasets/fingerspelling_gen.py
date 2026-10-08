@@ -184,7 +184,7 @@ class MediaPipeDataset(Dataset):
 
         # normalize
         poses[..., :2] = normalize(poses[..., :2], normalize_value=0.5)
-        poses[:, 9:10, 2] -= poses[:, 9:10, 2]
+        poses[:, :, 2] -= poses[:, 9:10, 2]
 
         # rotation augmentation
         if self.do_augm:

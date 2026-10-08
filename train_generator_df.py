@@ -204,7 +204,7 @@ def main(cfg: DictConfig):
                 recognizer_out = recognizer.generate(out_poses_2d, rlh_seg, frame_idx, bos_token_id=len(char_list), eos_token_id=0)
                 output_ids = recognizer_out['output_ids']
                 for b in range(B):
-                    pred = ''.join(invert_to_chars(output_ids[b:b+1, 1:-1].cpu(), inv_vocab_map))
+                    pred = ''.join(invert_to_chars(output_ids[b:b+1, 1:].cpu(), inv_vocab_map))
                     preds.append(pred)
 
                 poses_2d = poses[..., :2]
@@ -212,7 +212,7 @@ def main(cfg: DictConfig):
                 recognizer_out = recognizer.generate(poses_2d, rlh_seg, frame_idx, bos_token_id=len(char_list), eos_token_id=0)
                 output_ids_gt_poses = recognizer_out['output_ids']
                 for b in range(B):
-                    pred_gt_poses = ''.join(invert_to_chars(output_ids_gt_poses[b:b+1, 1:-1].cpu(), inv_vocab_map))
+                    pred_gt_poses = ''.join(invert_to_chars(output_ids_gt_poses[b:b+1, 1:].cpu(), inv_vocab_map))
                     preds_gt_poses.append(pred_gt_poses)
                     gt_label = word[b]
                     gt_labels.append(gt_label)

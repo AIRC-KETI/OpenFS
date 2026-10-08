@@ -29,6 +29,9 @@ def get_attn_ent_loss(cross_attns, rlh_seg, target_ids):
     ent = -(S * (S + 1e-12).log()) #.sum(dim=2)
     ent_masked = ent*(target_ids[:, 1:] != -100).unsqueeze(-1)
     ent_masked = ent_masked[ent_masked!=0]
+    if ent_masked.numel() == 0:
+        # Preserve autograd when all valid entropy contributions are zero.
+        return ent_masked.sum()
     ent_loss = ent_masked.mean()
     return ent_loss
 

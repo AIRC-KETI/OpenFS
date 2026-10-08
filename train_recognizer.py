@@ -214,8 +214,8 @@ def main(cfg: DictConfig):
 
                 B = poses.shape[0]
                 for b in range(B):
-                    current_pred = ''.join(invert_to_chars(output_ids[b:b+1, 1:-1].cpu(), inv_vocab_map))
-                    gt_label = ''.join(invert_to_chars(target_ids[b:b+1, 1:-1].cpu(), inv_vocab_map))
+                    current_pred = ''.join(invert_to_chars(output_ids[b:b+1, 1:].cpu(), inv_vocab_map))
+                    gt_label = ''.join(invert_to_chars(target_ids[b:b+1, 1:].cpu(), inv_vocab_map))
 
                     preds.append(current_pred)
                     gt_labels.append(gt_label)

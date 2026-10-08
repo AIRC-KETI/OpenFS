@@ -58,7 +58,7 @@ class EncoderTransformer(nn.Module):
         src_emb = src_emb + frame_idx_enc
         src_emb = torch.cat([time_emb, src_emb], dim=1) # frame-wise
 
-        src_attn_mask = get_batch_attention_mask(frame_label, constants.MINUS_ONE_HUNDRED_VALUE)
+        src_attn_mask = get_batch_attention_mask(frame_label, self.char_size)
         src_attn_mask = torch.cat([torch.zeros(B, 1, device=device), src_attn_mask], dim=1)
         encoded_features = self.encoder(src_emb, src_key_padding_mask=src_attn_mask)
         x0_pred = self.encoder_head(encoded_features)
