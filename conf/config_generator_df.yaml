@@ -11,6 +11,7 @@ train:
   num_epochs: 120
   start_eval_epoch: 10
   eval_epoch_step: 10
+  eval_max_len: null  # Auto: at least 32, or longest validation text plus EOS.
   print_step_iter: 400
   batch_size: 32
   train_shuffle: true
