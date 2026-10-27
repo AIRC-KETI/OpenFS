@@ -54,6 +54,7 @@ def main(cfg: DictConfig):
     logging.info(char_list)
 
     test_batch_size = cfg.get('test_batch_size', 32)
+    test_max_len = cfg.get('test_max_len', 32)
     dataset_test = test_dataset_partial(vocab=vocab_map)
     test_dataloader = DataLoader(
         dataset_test,
@@ -104,7 +105,7 @@ def main(cfg: DictConfig):
             else:
                 video_names = None
 
-            recognizer_out = recognizer.generate(poses, rlh_seg, frame_idx, bos_token_id=len(char_list), eos_token_id=0)
+            recognizer_out = recognizer.generate(poses, rlh_seg, frame_idx, max_len=test_max_len, bos_token_id=len(char_list), eos_token_id=0)
             output_ids = recognizer_out['output_ids']
 
             B = output_ids.shape[0]

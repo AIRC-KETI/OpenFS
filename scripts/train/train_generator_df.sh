@@ -39,12 +39,12 @@ python train_generator_df.py \
     train.start_eval_epoch=100 \
     train.eval_epoch_step=100 \
     train_dataset._target_=lib.datasets.fingerspelling_gen_fsboard.MediaPipeDataset \
-    train_dataset.data_path=data/fingerspelling/fsboard_train_proc_clean.npz \
+    train_dataset.data_path=data/fingerspelling_fsboard/fsboard_train_proc_clean.npz \
     train_dataset.representation=3d \
     train_dataset.do_affine=false \
     train_dataset.do_reverse=false \
     test_dataset._target_=lib.datasets.fingerspelling_gen_fsboard.MediaPipeDataset \
-    test_dataset.data_path=data/fingerspelling/fsboard_validation_proc_clean.npz \
+    test_dataset.data_path=data/fingerspelling_fsboard/fsboard_validation_proc_clean.npz \
     test_dataset.representation=3d \
     generator.pose_dim=63 \
     generator.dim_feedforward=1024 \

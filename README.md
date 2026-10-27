@@ -83,6 +83,7 @@ If the download scripts are temporarily blocked, you can also download the files
 
 - [OpenFS data folder](https://drive.google.com/drive/folders/1NB5wVgeTmoZIGjq58ueejj80mFmtebSg?usp=sharing)
 - [OpenFS checkpoint folder](https://drive.google.com/drive/folders/1BiUwqlEbBhy9q4wXKEIzJ0CBuvywHGX1?usp=sharing)
+- [FSBoard test set (`fsboard_test.npz`)](https://drive.google.com/file/d/1CjNvkhOx4uUBYraaFIQZ-fXpotiXEdof/view?usp=sharing): place it in `data/fingerspelling_fsboard/`
 
 Directory structure:
 

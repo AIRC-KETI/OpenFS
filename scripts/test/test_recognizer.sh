@@ -41,9 +41,10 @@ run_recognizer_fsboard () {
 MODEL_PATH=$1
 NAME=$2
 
-python test_recognizer_fsboard.py \
+python test_recognizer.py \
     recognizer.ckpt_path=$MODEL_PATH/best_model.pth \
     +test_batch_size=32 \
+    +test_max_len=64 \
     test_dataset.data_path=data/fingerspelling_fsboard/fsboard_test.npz \
     hydra.run.dir=test_results/base/fsboard/$NAME \
     --config-path=$MODEL_PATH/.hydra \
